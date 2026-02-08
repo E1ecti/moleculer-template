@@ -1,0 +1,9 @@
+/.*
+/dist
+/node_modules
+
+!.env.template
+!.gitattributes
+!.gitignore
+!.yarnrc.yml
+!.vscode

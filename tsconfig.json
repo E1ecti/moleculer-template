@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@mixins/*": [
+        "./src/mixins/*"
+      ]
+    }
+  },
+  "exclude": [
+    "src/services/**/_*.ts",
+    "src/services/_*",
+    "vite.config.ts",
+    "rolldown.config.ts"
+  ]
+}

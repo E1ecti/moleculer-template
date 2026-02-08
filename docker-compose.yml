@@ -1,0 +1,52 @@
+services:
+  # 1. Сервис вашего приложения
+  app:
+    # Собирать образ из Dockerfile в текущей директории
+    build: .
+    container_name: backend
+    # Не доступно снаружи
+    # ports:
+    #   # Пробрасываем порт 3000 хоста на порт 3000 контейнера
+    #   - "3000:3000"
+    environment:
+      # Указываем, что это продакшн-среда
+      ENV: production
+      # САМОЕ ВАЖНОЕ: строка подключения к MongoDB
+      # 'mongo' - это имя сервиса mongodb ниже.
+      # Docker Compose автоматически сделает 'mongo' доступным по сети.
+      MONGO_URI: mongodb://mongo:27017/YOUR_COLLECTION_NAME
+      # Здесь можно переопределить любые другие переменные из .env.production
+      # PORT: 3000
+    depends_on:
+      # Запускать приложение только ПОСЛЕ запуска сервиса 'mongo'
+      - mongo
+    restart: unless-stopped
+
+  # 2. Сервис базы данных MongoDB
+  mongo:
+    # Используем официальный образ MongoDB
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      # Это необязательно, но позволяет подключаться к БД с вашего хоста
+      # (например, через MongoDB Compass) для отладки
+      - "27017:27017"
+    volumes:
+      # САМОЕ ВАЖНОЕ: Сохраняем данные БД
+      # 'mongo-data' - это именованный том Docker.
+      # Он сохранит ваши данные, даже если контейнер будет удален.
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  # 3. НОВЫЙ СЕРВИС: Cloudflare Tunnel
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cf-tunnel
+    restart: unless-stopped
+    depends_on:
+      - app
+    command: tunnel --no-autoupdate run --toke YOUR_TOKEN
+
+# Объявляем именованный том для MongoDB
+volumes:
+  mongo-data:
