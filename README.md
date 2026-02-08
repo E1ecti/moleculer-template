@@ -2,6 +2,8 @@
 
 Template app based on [moleculer](https://github.com/moleculerjs/moleculer), with API Gateway powered by [ultimate-express](https://github.com/dimdenGD/ultimate-express), validation via [fastest-validator-decorators](https://github.com/AmauryD/fastest-validator-decorators) and [typegoose](https://github.com/typegoose/typegoose) ORM.
 
+Bundling powered by [rolldown](https://github.com/rolldown/rolldown) with some fixes.
+
 
 ### Validation Schema Declaration
 
@@ -27,11 +29,13 @@ export class BookParams {
 }
 ```
 
+Even though the original library requires using `getSchema(Schem)`, the `@Params(Schem)` decorator applies it automatically.
+
 ### Example of Service Action schema
 
-For security reasons, always use the `@Params` decorator to ensure user data validation. The `@Authorization` decorator is optional.
+For security reasons, always use the `@Params` decorator to ensure user data validation. The `@Authorization` decorator is optional. `@Rest` exposes the action via the API Gateway. The `@Visibility` decorator controls action accessibility (e.g., `published`, `public`, `protected`, `private`). See the Moleculer documentation for more details.
 
-> Note, `@Action` **must** be on top of the class declaration
+> Note, `@Action` **must** be on top of the class declaration.
 
 
 ```ts
