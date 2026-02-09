@@ -9,7 +9,7 @@ const SYMBOL = Symbol("action:oapi")
 
 const SchemaByCode = {
 	404: Refs.NotFound,
-	401: Refs.UnauthorizedError,
+	401: Refs.UnAuthorizedError,
 }
 
 const OpenApiDecorators = {

@@ -14,7 +14,7 @@ import type {
 import type { RestSchema } from "moleculer-web"
 import type { OpenAPIV3_1 } from "openapi-types"
 
-import type { Scopes } from "./authorization"
+// import type { Scopes } from "./authorization"
 import { OpenApiDecorators } from "./decorators.oapi"
 import { Refs } from "./schemas"
 
@@ -51,7 +51,7 @@ const AuthorizationOpenApiSchema: OpenAPIV3_1.OperationObject = {
   responses: {
     401: {
       description: "Access denied",
-      content: { "application/json": { schema: Refs.UnauthorizedError } },
+      content: { "application/json": { schema: Refs.UnAuthorizedError } },
     },
   },
 }

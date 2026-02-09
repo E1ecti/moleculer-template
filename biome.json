@@ -1,66 +1,66 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
-  "vcs": {
-    "enabled": false,
-    "clientKind": "git",
-    "useIgnoreFile": false
-  },
-  "files": {
-    "ignoreUnknown": true
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "attributePosition": "multiline"
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "noBannedTypes": "off"
-      },
-      "suspicious": {
-        "noShadowRestrictedNames": "off",
-        "noExplicitAny": "off"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double",
-      "semicolons": "asNeeded",
-      "arrowParentheses": "asNeeded"
-    }
-  },
-  "css": {
-    "formatter": {
-      "quoteStyle": "double"
-    }
-  },
-  "assist": {
-    "enabled": true,
-    "actions": {
-      "source": {
-        "organizeImports": {
-          "level": "on",
-          "options": {
-            "groups": [
-              [
-                ":NODE:",
-                ":PACKAGE:",
-                "!@utils/**",
-                "!@models/**"
-              ],
-              ":BLANK_LINE:",
-              "@models/**",
-              "@utils/**",
-              ":PATH:"
-            ]
-          }
-        }
-      }
-    }
-  }
+	"$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": true
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"attributePosition": "multiline"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"noBannedTypes": "off"
+			},
+			"suspicious": {
+				"noShadowRestrictedNames": "off",
+				"noExplicitAny": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double",
+			"semicolons": "asNeeded",
+			"arrowParentheses": "asNeeded"
+		}
+	},
+	"css": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							[
+								":NODE:",
+								":PACKAGE:",
+								"!@utils/**",
+								"!@models/**"
+							],
+							":BLANK_LINE:",
+							"@models/**",
+							"@utils/**",
+							":PATH:"
+						]
+					}
+				}
+			}
+		}
+	}
 }

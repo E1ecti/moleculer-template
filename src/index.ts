@@ -76,9 +76,7 @@ mongoose
 broker
   .start()
   .then(() => {
-    if (env.ENV === "development") broker.repl()
-
-    broker.logger.info("Moleculer server started")
-    broker.logger.info("Loading services...")
+    if (env.NODE_ENV === "development")
+      broker.repl()
   })
   .catch(broker.logger.error)
