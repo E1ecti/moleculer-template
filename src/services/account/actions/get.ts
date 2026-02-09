@@ -10,7 +10,7 @@ import {
   O,
   Rest,
 } from "@utils/decorators"
-import { Errors, MakeError } from "@utils/Errors"
+import { E, MakeError } from "@utils/Errors"
 import { Refs } from "@utils/schemas"
 
 @Action("me")
@@ -30,7 +30,8 @@ class AccountMe extends DecoratedMixin {
       return _.pick(account, Projections.DEFAULT)
     }
 
-    return MakeError(Errors.NOT_FOUND, { message: "Account not found" })
+    // return MakeError("NOT_FOUND", { message: "Account not found" })
+    return E.NOT_FOUND("Account not found")
   }
 }
 

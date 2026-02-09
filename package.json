@@ -4,9 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "",
-    "build": "",
-    "typegen": "watchexec -w src/services -- 'node ./src/utils/typegen.ts; node ./src/utils/typegen.oapi.ts'"
+		"start": "node dist",
+		"watch": "node --watch dist",
+		"build": "rolldown --watch -c src/rolldown.config.ts",
+		"dev": "rolldown --watch -c src/rolldown.config.ts & node --watch dist",
+    "typegen": "watchexec -w src/services -- 'node ./src/utils/typegen.ts; node ./src/utils/typegen.oapi.ts'",
+		"lint": "biome lint --write ./src",
+    "docker:build": "docker compose build"
   },
   "devDependencies": {
     "@oxc-project/runtime": "^0.112.0",

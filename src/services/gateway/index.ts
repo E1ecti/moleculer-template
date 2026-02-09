@@ -59,8 +59,8 @@ export default {
       origin: [
         "http://localhost:4321", // Dev frontend
         "http://localhost:3000", // Dev backend
-        "https://bma.media-archery.com", // Prod frontend
-        "https://api.media-archery.com", // Prod backend
+        "https://example.com", // Prod frontend
+        "https://api.example.com", // Prod backend
       ],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
@@ -171,20 +171,20 @@ export default {
 
       // (Missing header)
       if (!req.headers.cookie)
-        return MakeError(Errors.UNAUTHORIZED, { message: "No cookie" })
+        return MakeError("UNAUTHORIZED", { message: "No cookie" })
 
       // (Missing referer)
       if (!req.headers.referer)
-        return MakeError(Errors.UNAUTHORIZED, { message: "No referer" })
+        return MakeError("UNAUTHORIZED", { message: "No referer" })
 
       const token = cookie.parse(req.headers.cookie)?.session_token
       // (missing pair key-value)
-      if (!token) return MakeError(Errors.UNAUTHORIZED, { message: "No token" })
+      if (!token) return MakeError("UNAUTHORIZED", { message: "No token" })
 
       const data = await JwtTokens.verifyToken(token)
       // "What is it?
       if (!data.id)
-        return MakeError(Errors.UNAUTHORIZED, { message: "Invalid token" })
+        return MakeError("UNAUTHORIZED", { message: "Invalid token" })
 
       ctx.meta.user = data.id
     },

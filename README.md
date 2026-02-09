@@ -77,18 +77,53 @@ class SessionStop extends DecoratedMixin {
 		const { id } = ctx.params
 		const { user } = ctx.meta
 
-		await Session.updateOne({
+		const result = await Session.updateOne({
 			_id: id,
 			user: user,
 			state: SessionState.ACTIVE
 		}, {
 			$set: { state: SessionState.TERMINATED }
 		})
+			.catch(err => {
+				this.logger.error(err)
+				return false
+			})
+
+		if (!result || !result.modifiedCount)
+			return E.NOT_FOUND("Session not found")
+		
+		await ctx.broadcast("session.updated", { id })
 
 		ctx.meta.$statusCode = 204
-		return true
+		return
 	}
 }
 
+// Use `.schema` for legacy compa
 export default SessionStop.schema
 ```
+
+Текущий шаблон предлагает два варианта создания ошибок, которые должны быть заранее объявлены в `@utils/Errors`.
+
+1. E.ERROR_CODE(message?: string, data?: any)
+2. MakeError(code: string, { message?: string, data?: any })
+
+```ts
+import { E } from "@utils/Errors"
+
+return E.LIMIT_REACHED("Message", {
+	expected: { min: 1, max: 20},
+	recieved: 100
+})
+```
+
+Либо-же:
+```ts
+import { MakeError } from "@utils/Errors"
+
+MakeError("ERROR_CODE", {
+	message: "Message",
+	data: <...>
+})
+```
+
