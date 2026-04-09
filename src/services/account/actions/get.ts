@@ -1,4 +1,3 @@
-import _ from "lodash"
 import type { AppContext } from "moleculer"
 
 import Account, { Projections } from "@models/Account"
@@ -10,8 +9,7 @@ import {
   O,
   Rest,
 } from "@utils/decorators"
-import { E, MakeError } from "@utils/Errors"
-import { Refs } from "@utils/schemas"
+// import { Refs } from "@utils/schemas"
 
 @Action("me")
 @Rest("GET", "/me")
@@ -21,17 +19,10 @@ import { Refs } from "@utils/schemas"
   "This method returns the account information",
 )
 @O.Response(200, "Account information", BetterM2S(Account, Projections.DEFAULT))
-@O.Response(404, "Account not found", Refs.NotFound)
+// @O.Response(404, "Account not found", Refs.NotFound)
 class AccountMe extends DecoratedMixin {
   async handler(ctx: AppContext<null>) {
-    const account = await Account.findById(ctx.meta.user)
-
-    if (account?._id) {
-      return _.pick(account, Projections.DEFAULT)
-    }
-
-    // return MakeError("NOT_FOUND", { message: "Account not found" })
-    return E.NOT_FOUND("Account not found")
+    return Account.findById(ctx.meta.user, Projections.DEFAULT).toJSON()
   }
 }
 
