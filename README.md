@@ -100,7 +100,7 @@ class SessionStop extends DecoratedMixin {
 }
 
 // Use `.schema` for legacy compa
-export default SessionStop.schema
+export default SessionStop
 ```
 
 Текущий шаблон предлагает два варианта создания ошибок, которые должны быть заранее объявлены в `@utils/Errors`.
